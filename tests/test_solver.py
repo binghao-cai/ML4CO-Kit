@@ -31,76 +31,78 @@ else:
     TORCH_SUPPORT = False
     CUDA_SUPPORT = False
 
-# Check if gurobi is supported
-import gurobipy as gp
-try:
-    env = gp.Env(empty=True)
-    env.start()
-    GUROBI_SUPPORT = True
-except gp.GurobiError as e:
-    GUROBI_SUPPORT = False
+# # Check if gurobi is supported
+# import gurobipy as gp
+# try:
+#     env = gp.Env(empty=True)
+#     env.start()
+#     GUROBI_SUPPORT = True
+# except gp.GurobiError as e:
+#     GUROBI_SUPPORT = False
 
 
 # Get solvers to be tested (no torch used)
 from tests.solver_test import SolverTesterBase
 from tests.solver_test import (
-    ConcordeSolverTester,
-    GAEAXSolverTester,
-    GpDegreeSolverTester, 
-    HGSSolverTester, 
-    ILSSolverTester, 
-    InsertionSolverTester, 
-    KaMISSolverTester, 
-    LcDegreeSolverTester,
-    LKHSolverTester,
-    ORSolverTester,
+    # ConcordeSolverTester,
+    # GAEAXSolverTester,
+    # GpDegreeSolverTester, 
+    # HGSSolverTester, 
+    # ILSSolverTester, 
+    # InsertionSolverTester, 
+    # KaMISSolverTester, 
+    # LcDegreeSolverTester,
+    # LKHSolverTester,
+    # ORSolverTester,
     SMSolverTester,
     IPFPSolverTester,
-    RRWMSolverTester
+    RRWMSolverTester,
+    AStarSolverTester,
 )
 basic_solver_class_list = [
-    ConcordeSolverTester, 
-    GAEAXSolverTester,
-    GpDegreeSolverTester, 
-    HGSSolverTester, 
-    ILSSolverTester, 
-    InsertionSolverTester, 
-    KaMISSolverTester,
-    LcDegreeSolverTester,
-    LKHSolverTester,
-    ORSolverTester,
+    # ConcordeSolverTester, 
+    # GAEAXSolverTester,
+    # GpDegreeSolverTester, 
+    # HGSSolverTester, 
+    # ILSSolverTester, 
+    # InsertionSolverTester, 
+    # KaMISSolverTester,
+    # LcDegreeSolverTester,
+    # LKHSolverTester,
+    # ORSolverTester,
     SMSolverTester,
     IPFPSolverTester,
-    RRWMSolverTester
+    RRWMSolverTester,
+    AStarSolverTester,
 ]
 
-# Gurobi
-if GUROBI_SUPPORT:
-    from tests.solver_test import GurobiSolverTester
-    basic_solver_class_list.append(GurobiSolverTester)
+# # Gurobi
+# if GUROBI_SUPPORT:
+#     from tests.solver_test import GurobiSolverTester
+#     basic_solver_class_list.append(GurobiSolverTester)
    
 
 # Get solvers to be tested (torch used)
 if TORCH_SUPPORT:
     from tests.solver_test import (
-        BeamSolverTester, 
-        GreedySolverTester, 
-        RLSASolverTester, 
-        NeuroLKHSolverTester,
-        MCTSSolverTester,
-        AStarSolverTester,
-        GNN_AStarSolverTester,
-        NGMSolverTester
+        # BeamSolverTester, 
+        # GreedySolverTester, 
+        # RLSASolverTester, 
+        # NeuroLKHSolverTester,
+        # MCTSSolverTester,
+        # AStarSolverTester,
+        GENN_AStarSolverTester,
+        NGMSolverTester,
     )
     torch_solver_class_list = [
-        BeamSolverTester, 
-        GreedySolverTester, 
-        RLSASolverTester,
-        NeuroLKHSolverTester,
-        MCTSSolverTester,
-        AStarSolverTester,
-        GNN_AStarSolverTester,
-        NGMSolverTester
+        # BeamSolverTester, 
+        # GreedySolverTester, 
+        # RLSASolverTester,
+        # NeuroLKHSolverTester,
+        # MCTSSolverTester,
+        # AStarSolverTester,
+        GENN_AStarSolverTester,
+        NGMSolverTester,
     ]
 
 

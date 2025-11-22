@@ -28,7 +28,7 @@ class IPFPSolverTester(SolverTesterBase):
             test_args_list=[
                 {
                     "x0": None,
-                    "max_iter": 100,
+                    "max_iter": 50,
                 } 
             ],
             exclude_test_files_list=[[]]

@@ -911,7 +911,7 @@ class GENN(torch.nn.Module):
             num_nodes_2 = data.g2.nodes_num[i] + 1
             _x_pred = self._astar(cur_data)
             x_pred[i][:num_nodes_1, :num_nodes_2] = _x_pred.T if exchange else _x_pred
-        return x_pred[:, :-1, :-1]
+        return x_pred
 
     def _astar(self, data: GraphPair):
         if self.args['cuda']:

@@ -53,7 +53,7 @@ class SOLVER_TYPE(str, Enum):
     NEUROLKH = "neurolkh"
     MCTS = "mcts"
     NGM = 'ngm'
-    GNN_ASTAR = 'astar'
+    GENN_ASTAR = 'genn_astar'
 
 class SolverBase(object):
     """Base class for all solvers."""

@@ -30,3 +30,4 @@ from .mcut import MCutWrapperTester
 """
 # Graph Set Problem
 from .gm import GMWrapperTester
+from .ged import GEDWrapperTester

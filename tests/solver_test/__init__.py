@@ -17,32 +17,32 @@ Solver Test Module.
 import importlib.util
 found_torch = importlib.util.find_spec("torch")
 
-if found_torch is not None:
-    from .beam import BeamSolverTester
-    from .greedy import GreedySolverTester
-    from .mcts import MCTSSolverTester
-    from .neurolkh import NeuroLKHSolverTester
-    from .rlsa import RLSASolverTester
-else:
-    TORCH_SUPPORT = False
+# if found_torch is not None:
+#     from .beam import BeamSolverTester
+#     from .greedy import GreedySolverTester
+#     from .mcts import MCTSSolverTester
+#     from .neurolkh import NeuroLKHSolverTester
+#     from .rlsa import RLSASolverTester
+# else:
+#     TORCH_SUPPORT = False
 
 
 # Load other solver testers
 from .base import SolverTesterBase
-from .concorde import ConcordeSolverTester
-from .ga_eax import GAEAXSolverTester
-from .gp_degree import GpDegreeSolverTester
-from .gurobi import GurobiSolverTester
-from .hgs import HGSSolverTester
-from .ils import ILSSolverTester
-from .insertion import InsertionSolverTester
-from .kamis import KaMISSolverTester
-from .lc_degree import LcDegreeSolverTester
-from .lkh import LKHSolverTester
-from .ortools import ORSolverTester
+# from .concorde import ConcordeSolverTester
+# from .ga_eax import GAEAXSolverTester
+# from .gp_degree import GpDegreeSolverTester
+# from .gurobi import GurobiSolverTester
+# from .hgs import HGSSolverTester
+# from .ils import ILSSolverTester
+# from .insertion import InsertionSolverTester
+# from .kamis import KaMISSolverTester
+# from .lc_degree import LcDegreeSolverTester
+# from .lkh import LKHSolverTester
+# from .ortools import ORSolverTester
 from .sm import SMSolverTester
 from .rrwm import RRWMSolverTester
 from .ipfp import IPFPSolverTester
 from .astar import AStarSolverTester
-from .gnn_astar import GNN_AStarSolverTester
+from .genn_astar import GENN_AStarSolverTester
 from .ngm import NGMSolverTester

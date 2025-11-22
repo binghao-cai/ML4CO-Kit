@@ -153,5 +153,16 @@ class GMGenTester(GenTesterBase):
                     "edge_feature_gen": GraphFeatureGenerator(
                         feature_type=GRAPH_FEATURE_TYPE.BINOMIAL),
                 },
+                
+                # Perturbed graph problem
+                # Uniform (node/edge uniform featured)
+                {
+                    "distribution_type": GRAPH_TYPE.ER,
+                    "graph_generate_rule": GRAPH_GENERATE_RULE.PERTURBED,
+                    "node_feature_gen": GraphFeatureGenerator(
+                        feature_type=GRAPH_FEATURE_TYPE.UNIFORM),
+                    "edge_feature_gen": GraphFeatureGenerator(
+                        feature_type=GRAPH_FEATURE_TYPE.UNIFORM),
+                },
             ]
         )

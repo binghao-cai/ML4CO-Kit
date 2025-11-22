@@ -22,7 +22,7 @@ from enum import Enum
 from typing import Union
 from ml4co_kit.task.base import TASK_TYPE, TaskBase
 from ml4co_kit.generator.base import GeneratorBase
-from ml4co_kit.task.graphset.base import GraphSetTaskBase
+from ml4co_kit.task.graphset.base import Graph, GraphSetTaskBase
 
 class GRAPH_TYPE(str, Enum):
     """Define the graph types as an enumeration."""
@@ -165,11 +165,11 @@ class GraphSetGeneratorBase(GeneratorBase):
         task_type: TASK_TYPE, 
         distribution_type: GRAPH_TYPE = GRAPH_TYPE.ER,
         precision: Union[np.float32, np.float64] = np.float32,
-        nodes_num_scale: tuple = (50, 100),
+        nodes_num_scale: tuple = (10, 20),
         nodes_feat_dim_scal: tuple = (1, 10),
         edges_feat_dim_scal: tuple = (1, 10),
         # special args for different distributions (structural)
-        er_prob: float = 0.15,
+        er_prob: float = 0.5,
         ba_conn_degree: int = 10,
         hk_prob: float = 0.3,
         hk_conn_degree: int = 10,
@@ -224,13 +224,6 @@ class GraphSetGeneratorBase(GeneratorBase):
             GRAPH_TYPE.RB: self._generate_rb_graph,
             GRAPH_TYPE.WS: self._generate_watts_strogatz_graph,
         }
-        """
-        # Generation Function Dictionary
-        self.generate_func_dict = {
-            graph_type: lambda gt=graph_type :self._generate_task(gt)
-            for graph_type in [GRAPH_TYPE.ER, GRAPH_TYPE.BA, GRAPH_TYPE.HK, GRAPH_TYPE.WS, GRAPH_TYPE.RB]
-        }
-        """
       
     def _generate_barabasi_albert_graph(self):
         # Generate Barabasi-Albert graph
@@ -319,51 +312,68 @@ class GraphSetGeneratorBase(GeneratorBase):
         
         return nx_graph
 
-    def _isomorphic_graph_generate(self, nx_graph: nx.Graph) -> tuple[nx.Graph, np.ndarray]:
+    def _isomorphic_graph_generate(self, graph: Graph) -> tuple[Graph, np.ndarray]:
         # Build assignment matrix
-        num_nodes = len(nx_graph.nodes)
-        X_gt = np.zeros((num_nodes, num_nodes))
-        permutation =  np.random.permutation(num_nodes)
-        X_gt[np.arange(0, num_nodes, dtype=np.int32), permutation] = 1
-        X_flat = X_gt.ravel()
+        nodes_num = graph.nodes_num
+        X = np.zeros((nodes_num, nodes_num))
+        permutation = np.random.permutation(nodes_num) # graph2 to graph1
+        X[np.arange(0, nodes_num, dtype=np.int32), permutation] = 1
+        X = X.T
+        mapping_1to2 = X.argmax(axis=1)
         
         # Build isomorphic graph
-        mapping = {old: new for old, new in enumerate(permutation)}
-        new_graph = nx.relabel_nodes(nx_graph, mapping).copy()
-        new_graph = nx.convert_node_labels_to_integers(new_graph, ordering="sorted")
+        new_nodes_feat = graph.nodes_feature[permutation]
+        new_edge_index = mapping_1to2[graph.edge_index]
+        iso_graph = Graph(
+            nodes_num=nodes_num, 
+            nodes_feature=new_nodes_feat, 
+            edge_index=new_edge_index, 
+            edges_feature=graph.edges_feature.copy(),
+            nodes_feat_dim=graph.nodes_feature.shape[1],
+            edges_feat_dim=graph.edges_feature.shape[1]
+            )
+    
       
-        return new_graph, X_flat
+        return iso_graph, X
      
-    def _induced_subgraph_generate(self, nx_graph: nx.Graph, keep_ratio: float = 0.5) ->tuple[nx.Graph, np.ndarray]:
-        nodes = np.array(nx_graph.nodes())
-        n = len(nodes)
-        k = max(1, int(n * keep_ratio))
+    def _induced_subgraph_generate(self, graph: Graph, keep_ratio: float = 0.5) ->tuple[Graph, np.ndarray]:
+        nodes_num = graph.nodes_num
+        nodes = np.arange(nodes_num, dtype=np.int32)
+        k = max(1, int(nodes_num * keep_ratio))
     
         # Random choose subnodes
         sub_nodes = np.random.choice(nodes, size=k, replace=False)
-        sub_graph_view = nx_graph.subgraph(sub_nodes)
-        sub_graph = nx.Graph()
-        for node in sub_nodes:
-            sub_graph.add_node(node, **nx_graph.nodes[node])
-        for u, v in sub_graph_view.edges():
-            sub_graph.add_edge(u, v, **nx_graph.edges[u,v])
-        mapping = {old_label: new_label for new_label, old_label in enumerate(sub_nodes)}
-        sub_graph = nx.relabel_nodes(sub_graph, mapping)
-        sub_graph = nx.convert_node_labels_to_integers(sub_graph, ordering="sorted")
+        mask = np.zeros(nodes_num, dtype=bool)
+        mask[sub_nodes] = True
+        
+        # Build subgraph
+        old_to_new_idx = -np.ones(nodes_num, dtype=np.int32)
+        old_to_new_idx[sub_nodes] = np.arange(k, dtype=np.int32)
+        
+        sub_nodes_feat = graph.nodes_feature[sub_nodes]
+        edge_index = graph.edge_index
+        edge_mask = mask[edge_index[0]] & mask[edge_index[1]]
+        sub_edges_feat = graph.edges_feature[edge_mask]
+        sub_edge_index = old_to_new_idx[edge_index[:, edge_mask]]
+        
+        sub_graph = Graph(
+            nodes_num=k,
+            nodes_feature=sub_nodes_feat,
+            edge_index=sub_edge_index,
+            edges_feature=sub_edges_feat,
+            nodes_feat_dim=graph.nodes_feature.shape[1],
+            edges_feat_dim=graph.edges_feature.shape[1]
+        )
         
         # Build matching matrix 
-        match_matrix = np.zeros((n, k), dtype=np.int32)
-        old_idx = sub_nodes.astype(int)
-        new_idx = np.arange(k, dtype=int)
-        match_matrix[old_idx, new_idx] = 1
+        X = np.zeros((nodes_num, k), dtype=np.int32)
+        X[sub_nodes, np.arange(k)] = 1
         
-        match_flat = match_matrix.ravel()
-        
-        return sub_graph, match_flat    
+        return sub_graph, X
      
     def _perturbed_graph_generate(
         self, 
-        nx_graph: nx.Graph,
+        graph: Graph,
         add_ratio: float = 0.01,
         remove_ratio: float = 0.01,
         perturb_node_features: bool = False,
@@ -372,41 +382,91 @@ class GraphSetGeneratorBase(GeneratorBase):
         edge_feat_noise_std: float = 0.1
         ) -> nx.Graph:
         """Generate a perturbed graph by adding/removing edges and optionally perturbing features."""
-        new_graph = nx_graph.copy()
-        n = new_graph.number_of_nodes()
-        m = new_graph.number_of_edges()
+        n = graph.nodes_num
+        edge_index = graph.edge_index.copy()        
+        edges_feat = graph.edges_feature.copy()     
+        nodes_feat = graph.nodes_feature.copy() 
+        
+        # edges changes
+        u = edge_index[0]
+        v = edge_index[1]
+        
+        can_u = np.minimum(u, v)
+        can_v = np.maximum(u, v)
+        can_edges = list(zip(can_u, can_v))
+        
+        unique_edges = list(set(can_edges))
+        num_unique = len(unique_edges)
+        
+        # Remove edges
+        num_remove = int(num_unique * remove_ratio)
+        if num_remove > 0:  
+            remove_edges = set(random.sample(unique_edges, k=min(num_remove, num_unique)))
 
-        # Edge perturbation
-        edges = list(new_graph.edges())
-        num_remove = int(remove_ratio * m)
-        if num_remove > 0:
-            new_graph.remove_edges_from(random.sample(edges, k=min(num_remove, len(edges))))
+            remove_mask = np.array([edge in remove_edges for edge in can_edges])
+            keep_mask = ~remove_mask
 
-        possible_edges = list(itertools.combinations(range(n), 2))
-        possible_edges = [e for e in possible_edges if not new_graph.has_edge(*e)]
-        num_add = int(add_ratio * len(possible_edges))
+            edge_index = edge_index[:, keep_mask]
+            edges_feat = edges_feat[keep_mask]
+        
+        # Add edges
+        u = edge_index[0]
+        v = edge_index[1]
+        can_u = np.minimum(u, v)
+        can_v = np.maximum(u, v)
+        existing_edges = set(zip(can_u, can_v))
+
+        possible_edges = [
+            (i, j)
+            for i in range(n)
+            for j in range(i + 1, n)
+            if (i, j) not in existing_edges
+        ]
+
+        if len(possible_edges) > 0 and add_ratio > 0:
+            num_add = int(add_ratio * len(possible_edges))
+
         if num_add > 0:
             new_edges = random.sample(possible_edges, k=min(num_add, len(possible_edges)))
-            new_edges_feature = self.edge_feature_gen.generate(len(new_edges), self.edges_feat_dim)
-            for i, edge in enumerate(new_edges):
-                new_graph.add_edge(edge[0], edge[1], feature=new_edges_feature[i])
+            new_feat = self.edge_feature_gen.generate(len(new_edges), dim=self.edges_feat_dim)
+            add_list = []
+            for (u, v) in new_edges:
+                add_list.append([u, v])
+                add_list.append([v, u])
 
-        # Node feature perturbation if needed
+            add_edge_index = np.array(add_list).T  
+            add_feat = np.repeat(new_feat, repeats=2, axis=0)
+            
+            edge_index = np.concatenate([edge_index, add_edge_index], axis=1)
+            edges_feat = np.concatenate([edges_feat, add_feat], axis=0)
+        
+        # Perturb features
         if perturb_node_features:
-            for _, data in new_graph.nodes(data=True):
-                if "feature" in data:
-                    noise = np.random.normal(0, node_feat_noise_std, size=(self.nodes_feat_dim,)).astype(self.precision)
-                    data["feature"] = data["feature"] + noise
-        
-        # Edge feature perturbation if needed
+            noise = np.random.normal(
+                0, node_feat_noise_std,
+                size=nodes_feat.shape
+            ).astype(nodes_feat.dtype)
+            nodes_feat = nodes_feat + noise
+            
         if perturb_edge_features:
-            for _, data in new_graph.edges(data=True):
-                if "feature" in data:
-                    noise = np.random.normal(0, edge_feat_noise_std, size=(self.edges_feat_dim,)).astype(self.precision)
-                    data["feature"] = data["feature"] + noise
-
-        return new_graph     
+            noise = np.random.normal(
+                0, edge_feat_noise_std,
+                size=edges_feat.shape
+            ).astype(edges_feat.dtype)
+            edges_feat = edges_feat + noise    
         
+        pert_graph = Graph(
+            nodes_num=n,
+            nodes_feature=nodes_feat,
+            edge_index=edge_index,
+            edges_feature=edges_feat,
+            nodes_feat_dim=graph.nodes_feature.shape[1],
+            edges_feat_dim=graph.edges_feature.shape[1]
+        )
+        
+        X = np.eye(n, dtype=np.int32)
+        return pert_graph, X
+               
     def _generate_feature(self, nx_graph: nx.Graph) -> nx.Graph:
         """Assign feature to nodes and edges."""
         # Add feature to nodes if specified
@@ -423,12 +483,6 @@ class GraphSetGeneratorBase(GeneratorBase):
     def generate(self) -> TaskBase:
         return self._generate_task()
     
-    def _create_instance(self, nx_graphs: list[nx.Graph]) -> GraphSetTaskBase:
-        """Create instance from list of nx.Graph."""
-        raise NotImplementedError(
-            "Subclasses of GraphGeneratorBase must implement this method."
-        )
-  
     def _generate_task(self) -> GraphSetTaskBase:
         """Create task by graph_type."""
         raise NotImplementedError(

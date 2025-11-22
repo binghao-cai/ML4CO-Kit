@@ -102,7 +102,7 @@ class GMWrapper(WrapperBase):
                 edge_feat1_str = split_line[0]    
                 tmp_line = split_line[1]
 
-                split_line = tmp_line.split(" association_graph_label ")
+                split_line = tmp_line.split(" association_match ")
                 edge_feat2_str = split_line[0] 
                 sol_str = split_line[1]   
                 
@@ -145,9 +145,9 @@ class GMWrapper(WrapperBase):
                 
                 sol = sol_str.split(" ")
                 sol = np.array(
-                    [float(asso_graph_label) for asso_graph_label in sol], 
+                    [float(association_match) for association_match in sol], 
                     dtype=self.precision
-                )
+                ).reshape(node_feat1.shape[0], node_feat2.shape[0])
                 
                 graph1 = Graph(precision=self.precision)
                 graph2 = Graph(precision=self.precision)
@@ -164,8 +164,7 @@ class GMWrapper(WrapperBase):
                 # Add to task list
                 if overwrite:
                     self.task_list.append(gm_task)
-                
-    
+                  
     def to_txt(
         self, file_path: pathlib.Path, show_time: bool = False, mode: str = "w"
     ):
@@ -183,7 +182,7 @@ class GMWrapper(WrapperBase):
                 task._check_sol_not_none()
                 edge_index1 = task.graphs[0].edge_index.T
                 edge_index2 = task.graphs[1].edge_index.T
-                sol = task.sol.squeeze()
+                sol_rav = task.sol.ravel()
                 
                 # Write data to ``.txt`` file
                 f.write(str(" ")+str("edge_index_for_graph1")+str(" "))
@@ -200,8 +199,8 @@ class GMWrapper(WrapperBase):
                 f.write(";".join(" ".join(str(v) for v in feat) for feat in task.graphs[0].edges_feature))
                 f.write(str(" ") + str("edge_feature_for_graph2") + str(" "))
                 f.write(";".join(" ".join(str(v) for v in feat) for feat in task.graphs[1].edges_feature))
-                f.write(str(" ") + str("association_graph_label") + str(" "))
-                f.write(str(" ").join(str(association_graph_label) for association_graph_label in sol))
+                f.write(str(" ") + str("association_match") + str(" "))
+                f.write(str(" ").join(str(association_match) for association_match in sol_rav))
                 f.write("\n")
             f.close()
     

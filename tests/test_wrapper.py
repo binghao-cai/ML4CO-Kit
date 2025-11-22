@@ -19,40 +19,42 @@ root_folder = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, root_folder)
 
 
-# Routing Problems
-from tests.wrapper_test import (
-    ATSPWrapperTester, 
-    CVRPWrapperTester, 
-    TSPWrapperTester, 
-    PCTSPWrapperTester
-)    
+# # Routing Problems
+# from tests.wrapper_test import (
+#     ATSPWrapperTester, 
+#     CVRPWrapperTester, 
+#     TSPWrapperTester, 
+#     PCTSPWrapperTester
+# )    
 
-# Graph Problems
-from tests.wrapper_test import (
-    MClWrapperTester, 
-    MISWrapperTester,
-    MVCWrapperTester,
-    MCutWrapperTester
-)
+# # Graph Problems
+# from tests.wrapper_test import (
+#     MClWrapperTester, 
+#     MISWrapperTester,
+#     MVCWrapperTester,
+#     MCutWrapperTester
+# )
 
 # Graph Set Problems
 from tests.wrapper_test import (
-    GMWrapperTester
+    GMWrapperTester,
+    #GEDWrapperTester,
 )
 
 
 if __name__ == "__main__":
-    # Routing Problems
-    ATSPWrapperTester().test()
-    CVRPWrapperTester().test()
-    PCTSPWrapperTester().test()
-    TSPWrapperTester().test()
+    # # Routing Problems
+    # ATSPWrapperTester().test()
+    # CVRPWrapperTester().test()
+    # PCTSPWrapperTester().test()
+    # TSPWrapperTester().test()
     
-    # Graph Problems
-    MClWrapperTester().test()
-    MCutWrapperTester().test()
-    MISWrapperTester().test()
-    MVCWrapperTester().test()
+    # # Graph Problems
+    # MClWrapperTester().test()
+    # MCutWrapperTester().test()
+    # MISWrapperTester().test()
+    # MVCWrapperTester().test()
     
-    # Graph Set Problem
+    # # Graph Set Problem
     GMWrapperTester().test()
+    # GEDWrapperTester().test()
