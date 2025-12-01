@@ -18,6 +18,7 @@ import functools
 from ml4co_kit.task.graphset.gm import GMTask
 from .modules import  heuristic_prediction_hun
 from ml4co_kit.solver.lib.astar.c_astar_src.c_astar import c_astar 
+
 def gm_astar(
     task_data: GMTask,
     beam_width: int = 0

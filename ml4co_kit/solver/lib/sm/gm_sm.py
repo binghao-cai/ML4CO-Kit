@@ -19,7 +19,7 @@ from ml4co_kit.solver.lib.utils_gm import _check_and_init, hungarian
 def gm_sm(
     task_data: GMTask,
     x0: np.ndarray,
-    max_iter: int =50,
+    max_iter: int = 50,
 ):
     if task_data.aff_mat is None:
         task_data.aff_mat = task_data.build_aff_mat()

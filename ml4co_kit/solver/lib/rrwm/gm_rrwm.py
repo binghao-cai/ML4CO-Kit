@@ -19,7 +19,7 @@ from ml4co_kit.solver.lib.utils_gm import _check_and_init, hungarian, sinkhorn
 def gm_rrwm(
     task_data: GMTask,
     x0: np.ndarray,
-    max_iter: int = 100,
+    max_iter: int = 50,
     sk_iter: int = 20,
     alpha: float = 0.2,
     beta: float = 30.0,
