@@ -1,0 +1,15 @@
+=== Solver: GM_er_unform_pert: nodes_num=10, dim = 36, er_prob=0.15 ===
+=== Solver: astar ===
+Std Dev: 0.00, Acc: 1.0000, Time(s): 0.0361
+Std Dev: 0.01, Acc: 1.0000, Time(s): 0.0360
+Std Dev: 0.02, Acc: 1.0000, Time(s): 0.0367
+Std Dev: 0.03, Acc: 1.0000, Time(s): 0.0360
+Std Dev: 0.04, Acc: 1.0000, Time(s): 0.0354
+Std Dev: 0.05, Acc: 1.0000, Time(s): 0.0359
+Std Dev: 0.06, Acc: 1.0000, Time(s): 0.0362
+Std Dev: 0.07, Acc: 1.0000, Time(s): 0.0368
+Std Dev: 0.08, Acc: 1.0000, Time(s): 0.0361
+Std Dev: 0.09, Acc: 1.0000, Time(s): 0.0360
+Std Dev: 0.10, Acc: 1.0000, Time(s): 0.0385
+Std Dev: 0.11, Acc: 1.0000, Time(s): 0.0655
+Std Dev: 0.12, Acc: 1.0000, Time(s): 0.8320

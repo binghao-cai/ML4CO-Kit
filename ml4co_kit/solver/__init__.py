@@ -46,5 +46,5 @@ from .sm import SMSolver
 from .ipfp import IPFPSolver
 from .rrwm import RRWMSolver
 from .ngm import NGMSolver
-from .genn_astar import GENN_AStarSolver
+from .genn_astar import GennAStarSolver
 

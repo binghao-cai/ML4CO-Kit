@@ -1,0 +1,21 @@
+=== Solver: GM_er_unform_isomorphic: nodes_num=4-10, dim = 8, er_prob=0.5 ===
+=== Solver: AStarSolver ===
+--- Inner ---
+Nodes Num: 4, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0006
+Nodes Num: 5, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0008
+Nodes Num: 6, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0020
+Nodes Num: 7, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0036
+Nodes Num: 8, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0142
+Nodes Num: 9, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0474
+Nodes Num: 10, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0238
+Nodes Num: 11, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1266
+
+--- Gaussian ---
+Nodes Num: 4, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0007
+Nodes Num: 5, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0008
+Nodes Num: 6, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0013
+Nodes Num: 7, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0035
+Nodes Num: 8, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0023
+Nodes Num: 9, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0108
+Nodes Num: 10, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0129
+Nodes Num: 11, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0256

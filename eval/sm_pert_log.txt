@@ -1,0 +1,35 @@
+=== Solver: GM_er_unform_pert: nodes_num=50, dim = 8, er_prob=0.15 ===
+=== Solver: sm ===
+--- Inner ---
+Std Dev: 0.00, Acc: 0.9840, Score(%): 97.4413, Time(s): 0.0134
+Std Dev: 0.05, Acc: 0.9880, Score(%): 98.4682, Time(s): 0.0223
+Std Dev: 0.10, Acc: 0.9780, Score(%): 97.3236, Time(s): 0.0112
+Std Dev: 0.15, Acc: 0.9700, Score(%): 95.7020, Time(s): 0.0159
+Std Dev: 0.20, Acc: 0.9480, Score(%): 92.7198, Time(s): 0.0146
+Std Dev: 0.25, Acc: 0.8960, Score(%): 87.6072, Time(s): 0.0129
+Std Dev: 0.30, Acc: 0.8120, Score(%): 75.4155, Time(s): 0.0141
+Std Dev: 0.35, Acc: 0.7460, Score(%): 67.8803, Time(s): 0.0121
+Std Dev: 0.40, Acc: 0.6580, Score(%): 57.3433, Time(s): 0.0104
+Std Dev: 0.45, Acc: 0.6160, Score(%): 54.8082, Time(s): 0.0108
+Std Dev: 0.50, Acc: 0.4740, Score(%): 44.7389, Time(s): 0.0112
+Std Dev: 0.55, Acc: 0.4360, Score(%): 40.7723, Time(s): 0.0137
+Std Dev: 0.60, Acc: 0.3860, Score(%): 36.1566, Time(s): 0.0101
+Std Dev: 0.65, Acc: 0.3080, Score(%): 31.2404, Time(s): 0.0114
+Std Dev: 0.70, Acc: 0.2780, Score(%): 30.7066, Time(s): 0.0119
+
+--- Gaussian ---
+Std Dev: 0.00, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0144
+Std Dev: 0.05, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0128
+Std Dev: 0.10, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0109
+Std Dev: 0.15, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0139
+Std Dev: 0.20, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0148
+Std Dev: 0.25, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0113
+Std Dev: 0.30, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0176
+Std Dev: 0.35, Acc: 0.9920, Score(%): 98.8724, Time(s): 0.0103
+Std Dev: 0.40, Acc: 0.8260, Score(%): 77.5082, Time(s): 0.0106
+Std Dev: 0.45, Acc: 0.5580, Score(%): 46.9829, Time(s): 0.0108
+Std Dev: 0.50, Acc: 0.4040, Score(%): 34.7324, Time(s): 0.0117
+Std Dev: 0.55, Acc: 0.2920, Score(%): 31.3155, Time(s): 0.0125
+Std Dev: 0.60, Acc: 0.2220, Score(%): 26.8526, Time(s): 0.0108
+Std Dev: 0.65, Acc: 0.1180, Score(%): 23.2789, Time(s): 0.0123
+Std Dev: 0.70, Acc: 0.1060, Score(%): 24.1837, Time(s): 0.0132

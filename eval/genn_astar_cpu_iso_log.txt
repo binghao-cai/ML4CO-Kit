@@ -1,0 +1,47 @@
+=== Solver: GM_er_unform_isomorphic: nodes_num=5-25, dim = 36, er_prob=0.5 ===
+=== Solver: GennAStarSolver ===
+--- Inner ---
+Nodes Num: 5, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.3459
+Nodes Num: 6, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1735
+Nodes Num: 7, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.3778
+Nodes Num: 8, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.3427
+Nodes Num: 9, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.4163
+Nodes Num: 10, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.4505
+Nodes Num: 11, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.3593
+Nodes Num: 12, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.4559
+Nodes Num: 13, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.5524
+Nodes Num: 14, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.5801
+Nodes Num: 15, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.5846
+Nodes Num: 16, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.5626
+Nodes Num: 17, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.8974
+Nodes Num: 18, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.7672
+Nodes Num: 19, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.8442
+Nodes Num: 20, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.8620
+Nodes Num: 21, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.8584
+Nodes Num: 22, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.9112
+Nodes Num: 23, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.8065
+Nodes Num: 24, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.9145
+Nodes Num: 25, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.9164
+
+--- Gaussian ---
+Nodes Num: 5, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1469
+Nodes Num: 6, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.3864
+Nodes Num: 7, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.3204
+Nodes Num: 8, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.3973
+Nodes Num: 9, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.4133
+Nodes Num: 10, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.3856
+Nodes Num: 11, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.4160
+Nodes Num: 12, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.4659
+Nodes Num: 13, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.5584
+Nodes Num: 14, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.5056
+Nodes Num: 15, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.5167
+Nodes Num: 16, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.6325
+Nodes Num: 17, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.6775
+Nodes Num: 18, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.7214
+Nodes Num: 19, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.8806
+Nodes Num: 20, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.9411
+Nodes Num: 21, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.8510
+Nodes Num: 22, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.8872
+Nodes Num: 23, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.9525
+Nodes Num: 24, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.9522
+Nodes Num: 25, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.9637

@@ -166,10 +166,10 @@ class GraphSetGeneratorBase(GeneratorBase):
         distribution_type: GRAPH_TYPE = GRAPH_TYPE.ER,
         precision: Union[np.float32, np.float64] = np.float32,
         nodes_num_scale: tuple = (10, 20),
-        nodes_feat_dim_scal: tuple = (1, 10),
-        edges_feat_dim_scal: tuple = (1, 10),
+        node_feat_dim_scale: tuple = (1, 10),
+        edge_feat_dim_scale: tuple = (1, 10),
         # special args for different distributions (structural)
-        er_prob: float = 0.5,
+        er_prob: float = 0.15,
         ba_conn_degree: int = 10,
         hk_prob: float = 0.3,
         hk_conn_degree: int = 10,
@@ -195,11 +195,11 @@ class GraphSetGeneratorBase(GeneratorBase):
         self.nodes_num_min, self.nodes_num_max = nodes_num_scale
         self.nodes_num_base = np.random.randint(self.nodes_num_min, self.nodes_num_max+1)
         
-        self.nodes_feat_dim_min, self.nodes_feat_dim_max = nodes_feat_dim_scal
-        self.nodes_feat_dim = np.random.randint(self.nodes_feat_dim_min, self.nodes_feat_dim_max+1)
+        self.node_feat_dim_min, self.node_feat_dim_max = node_feat_dim_scale
+        self.node_feat_dim = np.random.randint(self.node_feat_dim_min, self.node_feat_dim_max+1)
         
-        self.edges_feat_dim_min, self.edges_feat_dim_max = edges_feat_dim_scal
-        self.edges_feat_dim = np.random.randint(self.edges_feat_dim_min, self.edges_feat_dim_max+1)
+        self.edge_feat_dim_min, self.edge_feat_dim_max = edge_feat_dim_scale
+        self.edge_feat_dim = np.random.randint(self.edge_feat_dim_min, self.edge_feat_dim_max+1)
         
         # Special args for different distributions (structural)
         self.er_prob = er_prob
@@ -216,8 +216,8 @@ class GraphSetGeneratorBase(GeneratorBase):
         self.node_feature_gen = node_feature_gen
         self.edge_feature_gen = edge_feature_gen
         
-        # Single Graph Generation Function 
-        self._single_graph_generate= {
+        # Single Graph Generate Function 
+        self._generate_single_graph= {
             GRAPH_TYPE.BA: self._generate_barabasi_albert_graph,
             GRAPH_TYPE.ER: self._generate_erdos_renyi_graph,
             GRAPH_TYPE.HK: self._generate_holme_kim_graph,
@@ -322,15 +322,15 @@ class GraphSetGeneratorBase(GeneratorBase):
         mapping_1to2 = X.argmax(axis=1)
         
         # Build isomorphic graph
-        new_nodes_feat = graph.nodes_feature[permutation]
+        new_node_feat = graph.node_feature[permutation]
         new_edge_index = mapping_1to2[graph.edge_index]
         iso_graph = Graph(
             nodes_num=nodes_num, 
-            nodes_feature=new_nodes_feat, 
+            node_feature=new_node_feat, 
             edge_index=new_edge_index, 
-            edges_feature=graph.edges_feature.copy(),
-            nodes_feat_dim=graph.nodes_feature.shape[1],
-            edges_feat_dim=graph.edges_feature.shape[1]
+            edge_feature=graph.edge_feature.copy(),
+            node_feat_dim=graph.node_feature.shape[1],
+            edge_feat_dim=graph.edge_feature.shape[1]
             )
     
       
@@ -350,19 +350,19 @@ class GraphSetGeneratorBase(GeneratorBase):
         old_to_new_idx = -np.ones(nodes_num, dtype=np.int32)
         old_to_new_idx[sub_nodes] = np.arange(k, dtype=np.int32)
         
-        sub_nodes_feat = graph.nodes_feature[sub_nodes]
+        sub_node_feat = graph.node_feature[sub_nodes]
         edge_index = graph.edge_index
         edge_mask = mask[edge_index[0]] & mask[edge_index[1]]
-        sub_edges_feat = graph.edges_feature[edge_mask]
+        sub_edge_feat = graph.edge_feature[edge_mask]
         sub_edge_index = old_to_new_idx[edge_index[:, edge_mask]]
         
         sub_graph = Graph(
             nodes_num=k,
-            nodes_feature=sub_nodes_feat,
+            node_feature=sub_node_feat,
             edge_index=sub_edge_index,
-            edges_feature=sub_edges_feat,
-            nodes_feat_dim=graph.nodes_feature.shape[1],
-            edges_feat_dim=graph.edges_feature.shape[1]
+            edge_feature=sub_edge_feat,
+            node_feat_dim=graph.node_feature.shape[1],
+            edge_feat_dim=graph.edge_feature.shape[1]
         )
         
         # Build matching matrix 
@@ -374,8 +374,8 @@ class GraphSetGeneratorBase(GeneratorBase):
     def _perturbed_graph_generate(
         self, 
         graph: Graph,
-        add_ratio: float = 0.01,
-        remove_ratio: float = 0.01,
+        add_ratio: float = 0,
+        remove_ratio: float = 0,
         perturb_node_features: bool = False,
         perturb_edge_features: bool = False,
         node_feat_noise_std: float = 0.1,
@@ -384,10 +384,10 @@ class GraphSetGeneratorBase(GeneratorBase):
         """Generate a perturbed graph by adding/removing edges and optionally perturbing features."""
         n = graph.nodes_num
         edge_index = graph.edge_index.copy()        
-        edges_feat = graph.edges_feature.copy()     
-        nodes_feat = graph.nodes_feature.copy() 
+        edge_feat = graph.edge_feature.copy()     
+        node_feat = graph.node_feature.copy() 
         
-        # edges changes
+        # Remove edges
         u = edge_index[0]
         v = edge_index[1]
         
@@ -398,8 +398,8 @@ class GraphSetGeneratorBase(GeneratorBase):
         unique_edges = list(set(can_edges))
         num_unique = len(unique_edges)
         
-        # Remove edges
         num_remove = int(num_unique * remove_ratio)
+        
         if num_remove > 0:  
             remove_edges = set(random.sample(unique_edges, k=min(num_remove, num_unique)))
 
@@ -407,7 +407,7 @@ class GraphSetGeneratorBase(GeneratorBase):
             keep_mask = ~remove_mask
 
             edge_index = edge_index[:, keep_mask]
-            edges_feat = edges_feat[keep_mask]
+            edge_feat = edge_feat[keep_mask]
         
         # Add edges
         u = edge_index[0]
@@ -422,13 +422,14 @@ class GraphSetGeneratorBase(GeneratorBase):
             for j in range(i + 1, n)
             if (i, j) not in existing_edges
         ]
-
+        
+        num_add = 0
         if len(possible_edges) > 0 and add_ratio > 0:
             num_add = int(add_ratio * len(possible_edges))
 
         if num_add > 0:
             new_edges = random.sample(possible_edges, k=min(num_add, len(possible_edges)))
-            new_feat = self.edge_feature_gen.generate(len(new_edges), dim=self.edges_feat_dim)
+            new_feat = self.edge_feature_gen.generate(len(new_edges), dim=self.edge_feat_dim)
             add_list = []
             for (u, v) in new_edges:
                 add_list.append([u, v])
@@ -438,30 +439,30 @@ class GraphSetGeneratorBase(GeneratorBase):
             add_feat = np.repeat(new_feat, repeats=2, axis=0)
             
             edge_index = np.concatenate([edge_index, add_edge_index], axis=1)
-            edges_feat = np.concatenate([edges_feat, add_feat], axis=0)
+            edge_feat = np.concatenate([edge_feat, add_feat], axis=0)
         
         # Perturb features
         if perturb_node_features:
             noise = np.random.normal(
                 0, node_feat_noise_std,
-                size=nodes_feat.shape
-            ).astype(nodes_feat.dtype)
-            nodes_feat = nodes_feat + noise
+                size=node_feat.shape
+            ).astype(node_feat.dtype)
+            node_feat = node_feat + noise
             
         if perturb_edge_features:
             noise = np.random.normal(
                 0, edge_feat_noise_std,
-                size=edges_feat.shape
-            ).astype(edges_feat.dtype)
-            edges_feat = edges_feat + noise    
+                size=edge_feat.shape
+            ).astype(edge_feat.dtype)
+            edge_feat = edge_feat + noise    
         
         pert_graph = Graph(
             nodes_num=n,
-            nodes_feature=nodes_feat,
+            node_feature=node_feat,
             edge_index=edge_index,
-            edges_feature=edges_feat,
-            nodes_feat_dim=graph.nodes_feature.shape[1],
-            edges_feat_dim=graph.edges_feature.shape[1]
+            edge_feature=edge_feat,
+            node_feat_dim=graph.node_feature.shape[1],
+            edge_feat_dim=graph.edge_feature.shape[1]
         )
         
         X = np.eye(n, dtype=np.int32)
@@ -470,14 +471,14 @@ class GraphSetGeneratorBase(GeneratorBase):
     def _generate_feature(self, nx_graph: nx.Graph) -> nx.Graph:
         """Assign feature to nodes and edges."""
         # Add feature to nodes if specified
-        nodes_feature = self.node_feature_gen.generate(nx_graph.number_of_nodes(), self.nodes_feat_dim)
+        node_feat = self.node_feature_gen.generate(nx_graph.number_of_nodes(), self.node_feat_dim)
         for i, node in enumerate(nx_graph.nodes):
-            nx_graph.nodes[node]['feature'] = nodes_feature[i]
+            nx_graph.nodes[node]['feature'] = node_feat[i]
         
         # Add feature to edges if specified
-        edges_feature = self.edge_feature_gen.generate(nx_graph.number_of_edges(), self.edges_feat_dim)
+        edge_feat = self.edge_feature_gen.generate(nx_graph.number_of_edges(), self.edge_feat_dim)
         for i, edge in enumerate(nx_graph.edges):
-            nx_graph.edges[edge]['feature'] = edges_feature[i]
+            nx_graph.edges[edge]['feature'] = edge_feat[i]
         return nx_graph
     
     def generate(self) -> TaskBase:

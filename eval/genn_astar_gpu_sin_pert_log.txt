@@ -1,0 +1,25 @@
+=== Solver: GM_er_unform_perturbed: nodes_num=10, dim = 36, er_prob=0.5 ===
+=== Solver: GennAStarSolver ===
+--- Inner ---
+Std Dev: 0.00, Acc: 1.0000, Score(%): 100.0000, Time(s): 2.1011
+Std Dev: 0.05, Acc: 1.0000, Score(%): 100.0000, Time(s): 1.5347
+Std Dev: 0.10, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.6886
+Std Dev: 0.15, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.2241
+Std Dev: 0.20, Acc: 1.0000, Score(%): 100.0000, Time(s): 1.8000
+Std Dev: 0.25, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.2752
+Std Dev: 0.30, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.3728
+Std Dev: 0.35, Acc: 1.0000, Score(%): 100.0000, Time(s): 1.2790
+Std Dev: 0.40, Acc: 1.0000, Score(%): 100.0000, Time(s): 3.4328
+Std Dev: 0.45, Acc: 0.9800, Score(%): 99.8616, Time(s): 2.3633
+
+--- Gaussian ---
+Std Dev: 0.00, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1305
+Std Dev: 0.05, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0695
+Std Dev: 0.10, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0895
+Std Dev: 0.15, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1069
+Std Dev: 0.20, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1231
+Std Dev: 0.25, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0969
+Std Dev: 0.30, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.2198
+Std Dev: 0.35, Acc: 0.9800, Score(%): 98.0041, Time(s): 0.5026
+Std Dev: 0.40, Acc: 0.9600, Score(%): 97.3132, Time(s): 0.4500
+Std Dev: 0.45, Acc: 0.8800, Score(%): 94.9620, Time(s): 2.0460

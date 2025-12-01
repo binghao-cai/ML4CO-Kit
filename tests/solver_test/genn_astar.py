@@ -13,15 +13,15 @@ GENN_AStar Solver Tester.
 # See the Mulan PSL v2 for more details.
 
 import pathlib
-from ml4co_kit import TASK_TYPE, GENN_AStarSolver
+from ml4co_kit import TASK_TYPE, GennAStarSolver
 from tests.solver_test.base import SolverTesterBase
 
 
-class GENN_AStarSolverTester(SolverTesterBase):
+class GennAStarSolverTester(SolverTesterBase):
     def __init__(self, device: str = "cpu"):
-        super(GENN_AStarSolverTester, self).__init__(
+        super(GennAStarSolverTester, self).__init__(
             mode_list=["batch_solve"],
-            test_solver_class=GENN_AStarSolver,
+            test_solver_class=GennAStarSolver,
             test_task_type_list=[TASK_TYPE.GM,], #TASK_TYPE.GED],
             test_args_list=[
                 {

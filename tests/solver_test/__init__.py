@@ -44,5 +44,5 @@ from .sm import SMSolverTester
 from .rrwm import RRWMSolverTester
 from .ipfp import IPFPSolverTester
 from .astar import AStarSolverTester
-from .genn_astar import GENN_AStarSolverTester
+from .genn_astar import GennAStarSolverTester
 from .ngm import NGMSolverTester

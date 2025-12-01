@@ -89,7 +89,7 @@ found_torch = importlib.util.find_spec("torch")
 if found_torch is not None:
     from .solver import (
         # BeamSolver, GreedySolver, MCTSSolver, NeuroLKHSolver, RLSASolver,
-        NGMSolver, AStarSolver, GENN_AStarSolver
+        NGMSolver, AStarSolver, GennAStarSolver
     )
 
 """

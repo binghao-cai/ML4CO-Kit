@@ -1,0 +1,23 @@
+=== Solver: GM_er_isomorphic: dim = 36, er_prob=0.5 ===
+=== Solver: genn_astar ===
+Nodes Num: 5, Time(s): 0.0560, Acc: 1.0000, Score: 0.0000
+Nodes Num: 6, Time(s): 0.2168, Acc: 1.0000, Score: 0.0000
+Nodes Num: 7, Time(s): 0.1477, Acc: 1.0000, Score: 0.0000
+Nodes Num: 8, Time(s): 0.0321, Acc: 1.0000, Score: 0.0000
+Nodes Num: 9, Time(s): 0.0344, Acc: 1.0000, Score: 0.0000
+Nodes Num: 10, Time(s): 0.2300, Acc: 1.0000, Score: 0.0000
+Nodes Num: 11, Time(s): 0.0485, Acc: 1.0000, Score: 0.0000
+Nodes Num: 12, Time(s): 0.2073, Acc: 1.0000, Score: 0.0000
+Nodes Num: 13, Time(s): 0.0873, Acc: 1.0000, Score: 0.0000
+Nodes Num: 14, Time(s): 0.4493, Acc: 1.0000, Score: 0.0000
+Nodes Num: 15, Time(s): 0.4999, Acc: 1.0000, Score: 0.0000
+Nodes Num: 16, Time(s): 0.4703, Acc: 1.0000, Score: 0.0000
+Nodes Num: 17, Time(s): 0.6309, Acc: 1.0000, Score: 0.0000
+Nodes Num: 18, Time(s): 0.7504, Acc: 1.0000, Score: 0.0000
+Nodes Num: 19, Time(s): 0.1992, Acc: 1.0000, Score: 0.0000
+Nodes Num: 20, Time(s): 0.2634, Acc: 1.0000, Score: 0.0000
+Nodes Num: 21, Time(s): 0.4880, Acc: 1.0000, Score: 0.0000
+Nodes Num: 22, Time(s): 0.8157, Acc: 1.0000, Score: 0.0000
+Nodes Num: 23, Time(s): 0.7325, Acc: 1.0000, Score: 0.0000
+Nodes Num: 24, Time(s): 0.8195, Acc: 1.0000, Score: 0.0000
+Nodes Num: 25, Time(s): 0.4554, Acc: 1.0000, Score: 0.0000

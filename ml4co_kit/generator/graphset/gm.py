@@ -1,11 +1,24 @@
+r""""
+Generator for Graph Matching(GM) instances
+"""
+
+# Copyright (c) 2024 Thinklab@SJTUS
+# ML4CO-Kit is licensed under Mulan PSL v2.
+# You can use this software according to the terms and conditions of the Mulan PSL v2.
+# You may obtain a copy of Mulan PSL v2 at:
+# http://license.coscl.org.cn/MulanPSL2
+# THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+# EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+# MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+# See the Mulan PSL v2 for more details.
+
+
 import numpy as np
 import networkx as nx
-import itertools
-import random 
 from enum import Enum
 from typing import Union
 from ml4co_kit.task.base import TASK_TYPE
-from ml4co_kit.task.graphset.base import GraphSetTaskBase,Graph
+from ml4co_kit.task.graphset.base import Graph
 from ml4co_kit.task.graphset.gm import GMTask
 from ml4co_kit.generator.graphset.base import GRAPH_TYPE
 from ml4co_kit.generator.graphset.base import (
@@ -23,8 +36,8 @@ class GMGenerator(GraphSetGeneratorBase):
         distribution_type: GRAPH_TYPE = GRAPH_TYPE.ER,
         precision: Union[np.float32, np.float64] = np.float32,
         nodes_num_scale: tuple = (50, 100),
-        nodes_feat_dim_scal: tuple = (1, 10),
-        edges_feat_dim_scal: tuple = (1, 10),
+        node_feat_dim_scale: tuple = (1, 10),
+        edge_feat_dim_scale: tuple = (1, 10),
         graph_generate_rule: GRAPH_GENERATE_RULE =  GRAPH_GENERATE_RULE.ISOMORPHIC,
         # special args for different graph matching problrms
         keep_ratio: np.ndarray = 0.5, 
@@ -59,8 +72,8 @@ class GMGenerator(GraphSetGeneratorBase):
             distribution_type=distribution_type, 
             precision=precision,
             nodes_num_scale=nodes_num_scale,
-            nodes_feat_dim_scal=nodes_feat_dim_scal,
-            edges_feat_dim_scal=edges_feat_dim_scal,
+            node_feat_dim_scale=node_feat_dim_scale,
+            edge_feat_dim_scale=edge_feat_dim_scale,
             er_prob=er_prob,
             ba_conn_degree=ba_conn_degree,
             hk_prob=hk_prob,
@@ -89,7 +102,12 @@ class GMGenerator(GraphSetGeneratorBase):
         self.edge_aff_fn = edge_aff_fn
       
     def _generate_task(self) -> GMTask:
-        nx_graph_base: nx.Graph = self._single_graph_generate[self.distribution_type]()
+        nx_graph_base: nx.Graph = self._generate_single_graph[self.distribution_type]()
+        
+        # check edges of the generated graph
+        if nx_graph_base.number_of_edges() == 0:
+            raise ValueError("Generated base graph has no edges, please adjust the graph generation parameters.")
+        
         graph_base = Graph(precision=self.precision)
         graph_base.from_networkx(nx_graph_base)
         # Generate a new graph with reference solution by rule
@@ -99,9 +117,21 @@ class GMGenerator(GraphSetGeneratorBase):
         elif self.graph_generate_rule == GRAPH_GENERATE_RULE.INDUCED_SUBGRAPH:
             graph_gened, ref_sol =self._induced_subgraph_generate(graph_base, keep_ratio=self.keep_ratio)
         elif self.graph_generate_rule == GRAPH_GENERATE_RULE.PERTURBED:
-            graph_gened, ref_sol = self._perturbed_graph_generate(graph_base)
+            graph_gened, ref_sol = self._perturbed_graph_generate(
+                graph_base, 
+                add_ratio=self.add_ratio,
+                remove_ratio=self.remove_ratio,
+                perturb_node_features=self.perturb_node_features,
+                perturb_edge_features=self.perturb_edge_features,
+                node_feat_noise_std=self.node_feat_noise_std,
+                edge_feat_noise_std=self.edge_feat_noise_std
+            )
         else:
             raise ValueError("This generate rule is not supported for GM.")
+        
+        # check edges of the generated graph
+        if graph_gened.edges_num == 0:
+            raise ValueError("Generated graph has no edges, please adjust the graph generation parameters.")
         
         data = GMTask(precision=self.precision)
         data.from_data([graph_base, graph_gened], ref_sol, True)

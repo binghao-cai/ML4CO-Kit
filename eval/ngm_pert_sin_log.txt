@@ -1,0 +1,35 @@
+=== Solver: GM_er_unform_pert: nodes_num=50, dim = 8, er_prob=0.15 ===
+=== Solver: ngm ===
+--- Inner ---
+Std Dev: 0.00, Acc: 0.9960, Score(%): 99.4372, Time(s): 0.0508
+Std Dev: 0.05, Acc: 0.9820, Score(%): 97.6429, Time(s): 0.0505
+Std Dev: 0.10, Acc: 0.9940, Score(%): 99.1923, Time(s): 0.0505
+Std Dev: 0.15, Acc: 0.9960, Score(%): 99.5163, Time(s): 0.0499
+Std Dev: 0.20, Acc: 0.9260, Score(%): 88.5656, Time(s): 0.0498
+Std Dev: 0.25, Acc: 0.8020, Score(%): 71.5496, Time(s): 0.0499
+Std Dev: 0.30, Acc: 0.7120, Score(%): 60.2428, Time(s): 0.0556
+Std Dev: 0.35, Acc: 0.5460, Score(%): 41.8681, Time(s): 0.0503
+Std Dev: 0.40, Acc: 0.4400, Score(%): 36.2835, Time(s): 0.0510
+Std Dev: 0.45, Acc: 0.3660, Score(%): 33.4908, Time(s): 0.0505
+Std Dev: 0.50, Acc: 0.2960, Score(%): 27.2138, Time(s): 0.0507
+Std Dev: 0.55, Acc: 0.2340, Score(%): 25.5526, Time(s): 0.0505
+Std Dev: 0.60, Acc: 0.2100, Score(%): 25.1400, Time(s): 0.0507
+Std Dev: 0.65, Acc: 0.1740, Score(%): 24.6099, Time(s): 0.0504
+Std Dev: 0.70, Acc: 0.1920, Score(%): 25.9325, Time(s): 0.0500
+
+--- Gaussian ---
+Std Dev: 0.00, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0494
+Std Dev: 0.05, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0499
+Std Dev: 0.10, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0500
+Std Dev: 0.15, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0495
+Std Dev: 0.20, Acc: 0.9940, Score(%): 99.2490, Time(s): 0.0495
+Std Dev: 0.25, Acc: 0.9880, Score(%): 98.1853, Time(s): 0.0494
+Std Dev: 0.30, Acc: 0.9640, Score(%): 94.7608, Time(s): 0.0495
+Std Dev: 0.35, Acc: 0.8400, Score(%): 75.4587, Time(s): 0.0498
+Std Dev: 0.40, Acc: 0.6160, Score(%): 48.7646, Time(s): 0.0505
+Std Dev: 0.45, Acc: 0.4160, Score(%): 30.2835, Time(s): 0.0498
+Std Dev: 0.50, Acc: 0.2820, Score(%): 23.9396, Time(s): 0.0496
+Std Dev: 0.55, Acc: 0.2000, Score(%): 20.9625, Time(s): 0.0501
+Std Dev: 0.60, Acc: 0.1560, Score(%): 21.6187, Time(s): 0.0496
+Std Dev: 0.65, Acc: 0.0720, Score(%): 19.9042, Time(s): 0.0498
+Std Dev: 0.70, Acc: 0.0840, Score(%): 20.0116, Time(s): 0.0497

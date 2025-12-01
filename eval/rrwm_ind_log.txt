@@ -1,0 +1,27 @@
+=== Solver: GM_er_unform_ind: nodes_num=50, dim = 8, er_prob=0.15 ===
+=== Solver: rrwm ===
+--- Inner ---
+Keep Ratio: 0.80, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1001
+Keep Ratio: 0.82, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0934
+Keep Ratio: 0.84, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0958
+Keep Ratio: 0.86, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0972
+Keep Ratio: 0.88, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1012
+Keep Ratio: 0.90, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1022
+Keep Ratio: 0.92, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0962
+Keep Ratio: 0.94, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1049
+Keep Ratio: 0.96, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1066
+Keep Ratio: 0.98, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1069
+Keep Ratio: 1.00, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1196
+
+--- Gaussian ---
+Keep Ratio: 0.80, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1029
+Keep Ratio: 0.82, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0941
+Keep Ratio: 0.84, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0934
+Keep Ratio: 0.86, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0975
+Keep Ratio: 0.88, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0979
+Keep Ratio: 0.90, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1005
+Keep Ratio: 0.92, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0986
+Keep Ratio: 0.94, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0993
+Keep Ratio: 0.96, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1010
+Keep Ratio: 0.98, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1028
+Keep Ratio: 1.00, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1080

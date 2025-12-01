@@ -91,7 +91,7 @@ if TORCH_SUPPORT:
         # NeuroLKHSolverTester,
         # MCTSSolverTester,
         # AStarSolverTester,
-        GENN_AStarSolverTester,
+        GennAStarSolverTester,
         NGMSolverTester,
     )
     torch_solver_class_list = [
@@ -101,7 +101,7 @@ if TORCH_SUPPORT:
         # NeuroLKHSolverTester,
         # MCTSSolverTester,
         # AStarSolverTester,
-        GENN_AStarSolverTester,
+        GennAStarSolverTester,
         NGMSolverTester,
     ]
 

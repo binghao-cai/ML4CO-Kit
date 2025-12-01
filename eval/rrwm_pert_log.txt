@@ -1,0 +1,35 @@
+=== Solver: GM_er_unform_pert: nodes_num=50, dim = 8, er_prob=0.15 ===
+=== Solver: rrwm ===
+--- Inner ---
+Std Dev: 0.00, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1079
+Std Dev: 0.05, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1055
+Std Dev: 0.10, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1128
+Std Dev: 0.15, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1155
+Std Dev: 0.20, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1015
+Std Dev: 0.25, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1041
+Std Dev: 0.30, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1120
+Std Dev: 0.35, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1056
+Std Dev: 0.40, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1019
+Std Dev: 0.45, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1115
+Std Dev: 0.50, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1037
+Std Dev: 0.55, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1051
+Std Dev: 0.60, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1021
+Std Dev: 0.65, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1002
+Std Dev: 0.70, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1014
+
+--- Gaussian ---
+Std Dev: 0.00, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1177
+Std Dev: 0.05, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.0995
+Std Dev: 0.10, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1183
+Std Dev: 0.15, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1009
+Std Dev: 0.20, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1005
+Std Dev: 0.25, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1045
+Std Dev: 0.30, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1023
+Std Dev: 0.35, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1023
+Std Dev: 0.40, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1056
+Std Dev: 0.45, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1129
+Std Dev: 0.50, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1076
+Std Dev: 0.55, Acc: 1.0000, Score(%): 100.0000, Time(s): 0.1037
+Std Dev: 0.60, Acc: 0.9840, Score(%): 99.1874, Time(s): 0.1032
+Std Dev: 0.65, Acc: 0.6600, Score(%): 79.3427, Time(s): 0.1019
+Std Dev: 0.70, Acc: 0.3520, Score(%): 66.6399, Time(s): 0.1121
